@@ -1,0 +1,16 @@
+{
+  "name": "malibu-zona-patrullaje",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Mapa interactivo de patrullaje · Área de Seguridad de Servicios Médicos Malibu Latam",
+  "type": "module",
+  "scripts": {
+    "serve": "firebase serve --only hosting",
+    "seed": "node scripts/seed.mjs",
+    "vendor": "node scripts/vendor-firebase.mjs",
+    "deploy": "firebase deploy --only hosting,firestore:rules"
+  },
+  "dependencies": {
+    "firebase-admin": "^12.7.0"
+  }
+}

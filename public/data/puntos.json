@@ -1,0 +1,312 @@
+[
+  {
+    "id": "ciudad-bar",
+    "modo": "ciudad",
+    "nombre": "Bar",
+    "x": 30.12,
+    "y": 33.89,
+    "icono": "ciudad-bar.png",
+    "imagen": "ciudad-bar.webp",
+    "orden": 1
+  },
+  {
+    "id": "ciudad-teatro",
+    "modo": "ciudad",
+    "nombre": "Teatro",
+    "x": 64.72,
+    "y": 34.67,
+    "icono": "ciudad-teatro.png",
+    "imagen": "ciudad-teatro.webp",
+    "orden": 2
+  },
+  {
+    "id": "ciudad-estadio",
+    "modo": "ciudad",
+    "nombre": "Estadio",
+    "x": 74.53,
+    "y": 35.84,
+    "icono": "ciudad-estadio.png",
+    "imagen": "ciudad-estadio.webp",
+    "orden": 3
+  },
+  {
+    "id": "ciudad-casino",
+    "modo": "ciudad",
+    "nombre": "Sala de juegos (Casino)",
+    "x": 61.62,
+    "y": 40.33,
+    "icono": "ciudad-casino.png",
+    "imagen": "ciudad-casino.webp",
+    "orden": 4
+  },
+  {
+    "id": "ciudad-agencia-estandar",
+    "modo": "ciudad",
+    "nombre": "Agencia estándar",
+    "x": 56.28,
+    "y": 41.02,
+    "icono": "ciudad-agencia-estandar.png",
+    "imagen": "ciudad-agencia-estandar.webp",
+    "orden": 5
+  },
+  {
+    "id": "ciudad-agencia-premium",
+    "modo": "ciudad",
+    "nombre": "Agencia premium",
+    "x": null,
+    "y": null,
+    "icono": "ciudad-agencia-premium.png",
+    "imagen": "ciudad-agencia-premium.webp",
+    "orden": 6
+  },
+  {
+    "id": "ciudad-iglesia",
+    "modo": "ciudad",
+    "nombre": "Iglesia",
+    "x": 67.47,
+    "y": 44.43,
+    "icono": "ciudad-iglesia.png",
+    "imagen": "ciudad-iglesia.webp",
+    "orden": 7
+  },
+  {
+    "id": "ciudad-comisaria",
+    "modo": "ciudad",
+    "nombre": "Comisaría",
+    "x": 46.47,
+    "y": 48.05,
+    "icono": "ciudad-comisaria.png",
+    "imagen": "ciudad-comisaria.webp",
+    "orden": 8
+  },
+  {
+    "id": "ciudad-universidad",
+    "modo": "ciudad",
+    "nombre": "Oficina de Integración Social (Universidad)",
+    "x": 53.87,
+    "y": 49.51,
+    "icono": "ciudad-universidad.png",
+    "imagen": "ciudad-universidad.webp",
+    "orden": 9
+  },
+  {
+    "id": "ciudad-manitas",
+    "modo": "ciudad",
+    "nombre": "Mercado de vehículos",
+    "x": 96.9,
+    "y": 56.64,
+    "icono": "ciudad-manitas.png",
+    "imagen": "ciudad-manitas.webp",
+    "orden": 10
+  },
+  {
+    "id": "trabajo-tala",
+    "modo": "trabajo",
+    "nombre": "Leñador (tala)",
+    "x": 67.99,
+    "y": 14.16,
+    "icono": "trabajo-tala.png",
+    "imagen": "trabajo-tala.webp",
+    "orden": 1
+  },
+  {
+    "id": "trabajo-minero",
+    "modo": "trabajo",
+    "nombre": "Minero",
+    "x": 85.03,
+    "y": 16.02,
+    "icono": "trabajo-minero.png",
+    "imagen": "trabajo-minero.webp",
+    "orden": 2
+  },
+  {
+    "id": "trabajo-lago",
+    "modo": "trabajo",
+    "nombre": "Lugar de pesca (lago)",
+    "x": 53.36,
+    "y": 17.77,
+    "icono": "trabajo-lago.png",
+    "imagen": "trabajo-lago.webp",
+    "orden": 3
+  },
+  {
+    "id": "trabajo-taxi",
+    "modo": "trabajo",
+    "nombre": "Chofer de taxi",
+    "x": 67.64,
+    "y": 33.89,
+    "icono": "trabajo-taxi.png",
+    "imagen": "trabajo-taxi.webp",
+    "orden": 4
+  },
+  {
+    "id": "trabajo-muelle",
+    "modo": "trabajo",
+    "nombre": "Lugar de pesca (muelle)",
+    "x": 6.88,
+    "y": 46.78,
+    "icono": "trabajo-muelle.png",
+    "imagen": "trabajo-muelle.webp",
+    "orden": 5
+  },
+  {
+    "id": "trabajo-licencias",
+    "modo": "trabajo",
+    "nombre": "Licencias y transporte",
+    "x": 55.08,
+    "y": 58.69,
+    "icono": "trabajo-licencias.png",
+    "imagen": "trabajo-licencias.webp",
+    "orden": 6
+  },
+  {
+    "id": "trabajo-dinero",
+    "modo": "trabajo",
+    "nombre": "Repartidor de dinero",
+    "x": 62.82,
+    "y": 60.16,
+    "icono": "trabajo-dinero.png",
+    "imagen": "trabajo-dinero.webp",
+    "orden": 7
+  },
+  {
+    "id": "trabajo-mensajero",
+    "modo": "trabajo",
+    "nombre": "Mensajero",
+    "x": 72.29,
+    "y": 58.89,
+    "icono": "trabajo-mensajero.png",
+    "imagen": "trabajo-mensajero.webp",
+    "orden": 8
+  },
+  {
+    "id": "trabajo-camion",
+    "modo": "trabajo",
+    "nombre": "Chofer de camión",
+    "x": 79.0,
+    "y": 61.52,
+    "icono": "trabajo-camion.png",
+    "imagen": "trabajo-camion.webp",
+    "orden": 9
+  },
+  {
+    "id": "trabajo-mecanico",
+    "modo": "trabajo",
+    "nombre": "Mecánico",
+    "x": 41.48,
+    "y": 63.77,
+    "icono": "trabajo-mecanico.png",
+    "imagen": "trabajo-mecanico.webp",
+    "orden": 10
+  },
+  {
+    "id": "aks-ak-torre",
+    "modo": "aks",
+    "nombre": "AK – Torre",
+    "x": 54.99,
+    "y": 21.78,
+    "icono": "ak.png",
+    "imagen": "ak-torre.webp",
+    "orden": 1
+  },
+  {
+    "id": "aks-ak-paseo",
+    "modo": "aks",
+    "nombre": "AK – Paseo",
+    "x": 44.23,
+    "y": 35.21,
+    "icono": "ak.png",
+    "imagen": "ak-paseo.webp",
+    "orden": 2
+  },
+  {
+    "id": "aks-ak-deposito",
+    "modo": "aks",
+    "nombre": "AK – Depósito",
+    "x": 86.23,
+    "y": 56.98,
+    "icono": "ak.png",
+    "imagen": "ak-deposito.webp",
+    "orden": 3
+  },
+  {
+    "id": "aks-guarida-1",
+    "modo": "aks",
+    "nombre": "Guarida 1",
+    "x": 86.66,
+    "y": 30.13,
+    "icono": "guarida.png",
+    "imagen": "guarida1.webp",
+    "orden": 4
+  },
+  {
+    "id": "aks-guarida-2",
+    "modo": "aks",
+    "nombre": "Guarida 2",
+    "x": 87.61,
+    "y": 40.09,
+    "icono": "guarida.png",
+    "imagen": "guarida2.webp",
+    "orden": 5
+  },
+  {
+    "id": "aks-guarida-3",
+    "modo": "aks",
+    "nombre": "Guarida 3",
+    "x": 86.57,
+    "y": 49.46,
+    "icono": "guarida.png",
+    "imagen": "guarida3.webp",
+    "orden": 6
+  },
+  {
+    "id": "aks-guarida-4",
+    "modo": "aks",
+    "nombre": "Guarida 4",
+    "x": 93.63,
+    "y": 48.29,
+    "icono": "guarida.png",
+    "imagen": "guarida4.webp",
+    "orden": 7
+  },
+  {
+    "id": "aks-guarida-5",
+    "modo": "aks",
+    "nombre": "Guarida 5",
+    "x": 94.92,
+    "y": 61.52,
+    "icono": "guarida.png",
+    "imagen": "guarida5.webp",
+    "orden": 8
+  },
+  {
+    "id": "aks-guarida-6",
+    "modo": "aks",
+    "nombre": "Guarida 6",
+    "x": 80.98,
+    "y": 65.62,
+    "icono": "guarida.png",
+    "imagen": "guarida6.webp",
+    "orden": 9
+  },
+  {
+    "id": "aks-guarida-7",
+    "modo": "aks",
+    "nombre": "Guarida 7",
+    "x": 50.6,
+    "y": 63.18,
+    "icono": "guarida.png",
+    "imagen": "guarida7.webp",
+    "orden": 10
+  },
+  {
+    "id": "aks-gemas",
+    "modo": "aks",
+    "nombre": "Gemas",
+    "x": 80.55,
+    "y": 53.27,
+    "icono": "gemas.png",
+    "imagen": "gemas.webp",
+    "orden": 11
+  }
+]

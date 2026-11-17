@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Departamento de Seguridad</title>
+  <meta name="description" content="Mapa interactivo de patrullaje del Área de Seguridad de Servicios Médicos Malibu." />
+  <meta name="theme-color" content="#06111c" />
+  <!-- Uso interno: que los buscadores no la indexen (también va como header X-Robots-Tag en firebase.json) -->
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
+  <link rel="icon" href="assets/logo-48.png" type="image/png" sizes="48x48" />
+  <link rel="icon" href="assets/logo-192.png" type="image/png" sizes="192x192" />
+  <link rel="apple-touch-icon" href="assets/logo-192.png" />
+
+  <!-- Tipografía del sistema: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Precarga del mapa base -->
+  <link rel="preload" as="image" href="assets/area-banner.webp" />
+  <link rel="preload" as="image" href="assets/Mapa-Malibu.webp" />
+
+  <link rel="stylesheet" href="style.css" />
+  <script type="module" src="script.js"></script>
+</head>
+<body id="top">
+  <a class="skip-link" href="#mapa">Saltar al mapa</a>
+
+  <!-- ===== Topbar ===== -->
+  <header class="topbar">
+    <div class="topbar__inner">
+      <img class="brand-logo" src="assets/logo-96.webp" width="96" height="96" alt="" />
+      <div class="brand-text">
+        <strong>Departamento de Seguridad Hospitalaria</strong>
+        <span>Documento de uso interno - Dirección Dr. Ángel Riv · Dr. Jordan</span>
+      </div>
+
+      <!-- Menú de recursos (abre/cierra desde script.js) -->
+      <nav class="topnav" aria-label="Recursos">
+        <div class="menu">
+          <button type="button" class="menu__toggle" id="menu-recursos-btn"
+                  aria-expanded="false" aria-controls="menu-recursos">
+            <span aria-hidden="true">📚</span> Enlaces <span class="menu__caret" aria-hidden="true">▾</span>
+          </button>
+          <ul class="menu__list" id="menu-recursos" hidden>
+            <li>
+              <a href="https://onestate.com" target="_blank" rel="noopener noreferrer">
+                <span class="menu__icon" aria-hidden="true">🎮</span>
+                <span><strong>OneState</strong><small>Página oficial del juego</small></span>
+              </a>
+            </li>
+            <li>
+              <a href="https://portal-alianzamedica-malibu.netlify.app/" target="_blank" rel="noopener noreferrer">
+                <span class="menu__icon" aria-hidden="true">🏥</span>
+                <span><strong>Facción Médica Malibu</strong><small>Portal de la facción</small></span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- ===== Hero ===== -->
+    <!-- Portada: el banner (assets/area-banner.webp) se muestra entero y el texto va debajo -->
+    <section class="hero" aria-labelledby="hero-title">
+      <img class="hero__banner" src="assets/area-banner.webp" width="2048" height="488"
+           alt="Dr. Jordan, Médico Jefe Adjunto · Malibú Latam, OneState Roleplay" fetchpriority="high" />
+      <div class="hero__content">
+        <img class="hero__badge" src="assets/logo-192.png" width="192" height="192" alt="" />
+        <h1 id="hero-title">Seguridad Hospitalaria</h1>
+        <p class="hero__subtitle">Consulta los puntos ciegos recomendados para cada lugar.</p>
+        <p class="hero__hint"><span aria-hidden="true">👆</span> Documento interno para uso exclusivo del área. Se agradece no compartir.</p>
+      </div>
+    </section>
+
+    <!-- ===== Filtros + mapa ===== -->
+    <section class="map-section" aria-labelledby="map-title">
+      <h2 class="section-title" id="map-title"><span aria-hidden="true">🗺️</span> Mapa de patrullaje</h2>
+
+      <!-- Filtros: cada botón muestra u oculta los lugares de su recorrido. Se pueden combinar. -->
+      <div class="filters" role="group" aria-label="Filtrar lugares por zona">
+        <button type="button" class="route-btn" data-modo="ciudad" aria-pressed="false">
+          <span class="route-btn__icon" aria-hidden="true">🏙️</span>
+          <span class="route-btn__text">
+            <span class="route-btn__kicker">Áreas de la</span>
+            <span class="route-btn__title">ciudad</span>
+          </span>
+        </button>
+        <button type="button" class="route-btn" data-modo="trabajo" aria-pressed="false">
+          <span class="route-btn__icon" aria-hidden="true">🛠️</span>
+          <span class="route-btn__text">
+            <span class="route-btn__kicker">Áreas de</span>
+            <span class="route-btn__title">trabajo</span>
+          </span>
+        </button>
+        <button type="button" class="route-btn" data-modo="aks" aria-pressed="false">
+          <span class="route-btn__icon" aria-hidden="true">☠️</span>
+          <span class="route-btn__text">
+            <span class="route-btn__kicker">Zona de gemas</span>
+            <span class="route-btn__title"><em>AK´s</em> y guaridas</span>
+          </span>
+        </button>
+      </div>
+      <p class="filters__status" id="modo-desc" aria-live="polite"></p>
+
+      <div class="map-card">
+        <!-- Cada punto lleva su data-modo, que define su color: ciudad (amarillo), trabajo (violeta), aks (naranja). -->
+        <div class="map-stage" id="mapa" tabindex="-1">
+          <!-- .map-canvas es lo que se amplía y desplaza (zoom) -->
+          <div class="map-canvas" id="map-canvas">
+            <img class="map-img" src="assets/Mapa-Malibu.webp" width="581" height="1024"
+                 alt="Mapa de Malibu" draggable="false" />
+            <!-- Los botones de cada punto se insertan acá desde script.js -->
+            <div class="hotspots" id="hotspots" role="group" aria-label="Lugares del mapa"></div>
+          </div>
+
+          <!-- Controles de zoom -->
+          <div class="zoom-controls" role="group" aria-label="Zoom del mapa">
+            <button type="button" class="zoom-btn" data-zoom="in" aria-label="Acercar">+</button>
+            <button type="button" class="zoom-btn" data-zoom="out" aria-label="Alejar">−</button>
+            <button type="button" class="zoom-btn" data-zoom="reset" aria-label="Volver a la vista inicial" title="Volver a la vista inicial">⟲</button>
+          </div>
+        </div>
+        <p class="map-help">
+          <span class="map-help--mouse">Usa la rueda del mouse o haz doble clic para acercar. Arrastra para moverte.</span>
+          <span class="map-help--touch">Pellizca con dos dedos para acercar. Arrastra para moverte.</span>
+        </p>
+      </div>
+
+      <!-- Carrusel con las fotos de los lugares (lo arma script.js según los filtros activos) -->
+      <div class="gallery" aria-labelledby="gallery-title">
+        <div class="gallery__head">
+          <h3 class="gallery__title" id="gallery-title"><span aria-hidden="true">📸</span> Fotos de los puntos ciegos</h3>
+          <span class="gallery__count" id="gallery-count"></span>
+          <div class="gallery__nav">
+            <button type="button" class="zoom-btn" id="gallery-prev" aria-label="Fotos anteriores">‹</button>
+            <button type="button" class="zoom-btn" id="gallery-next" aria-label="Fotos siguientes">›</button>
+          </div>
+        </div>
+        <ul class="gallery__track" id="gallery-track" tabindex="0" aria-label="Fotos de los lugares; usa las flechas para recorrerlas"></ul>
+      </div>
+    </section>
+
+
+    <!-- ===== Consejos y recomendaciones ===== -->
+    <section class="tips-section" aria-labelledby="tips-title">
+      <h2 class="section-title" id="tips-title"><span aria-hidden="true">🚑</span> Consejos y recomendaciones</h2>
+
+      <div class="tips-card">
+        <!-- Foto del Dr. Jordan: si no carga, se ven sus iniciales -->
+        <figure class="tips-author">
+          <div class="tips-author__photo">
+            <span class="tips-author__initials" aria-hidden="true">DJ</span>
+            <img src="assets/dr-jordan-v3.webp" alt="Dr. Jordan" width="278" height="373" loading="lazy" data-fallback />
+          </div>
+          <figcaption>
+            <strong>Dr. Jordan</strong>
+            <span>Jefe Adjunto - Depto. Seguridad</span>
+          </figcaption>
+        </figure>
+
+        <div class="tips-body">
+          <p class="tips-intro">Lo básico del departamento.</p>
+
+          <div class="tips-groups">
+            <div class="tips-group">
+              <h3>Antes de salir a patrullar</h3>
+              <ul class="tips-list">
+                <li><span class="tips-list__icon" aria-hidden="true">👥</span><span><strong>Siempre en pareja</strong> y en una <strong>Dino del hospital</strong>.</span></li>
+                <li><span class="tips-list__icon" aria-hidden="true">📸</span><span><strong>Grabar</strong> videos de 10 seg. con el dron. Al inicio y fin quitar dron para ver la hora del servidor.</span></li>
+              </ul>
+            </div>
+
+            <div class="tips-group">
+              <h3>En el lugar de investigación</h3>
+              <ul class="tips-list">
+                <li><span class="tips-list__icon" aria-hidden="true">🔇</span><span><strong>Luces y motor apagados</strong>, sin hacer ruido.</span></li>
+                <li><span class="tips-list__icon" aria-hidden="true">🚗</span><span><strong>Quien conduce no graba video:</strong> queda atento por si hay que irse.</span></li>
+              </ul>
+            </div>
+
+            <div class="tips-group">
+              <h3>Al terminar el recorrido</h3>
+              <ul class="tips-list">
+                <li><span class="tips-list__icon" aria-hidden="true">📝</span><span><strong>Envía el informe enseguida.</strong></span></li>
+                <li><span class="tips-list__icon" aria-hidden="true">🙋</span><span>¿Dudas? <strong>Acércate a mí.</strong></span></li>
+              </ul>
+            </div>
+
+            <div class="tips-group">
+              <h3>Siempre</h3>
+              <ul class="tips-list">
+                <li><span class="tips-list__icon" aria-hidden="true">👀</span><span> <strong>Máxima atención </strong> a las <strong>macros</strong>.</span></li>
+                <li><span class="tips-list__icon" aria-hidden="true">🚪</span><span>Las <strong>puertas</strong> de las salas deben estar <strong>cerradas</strong>.</span></li>
+                
+                <li><span class="tips-list__icon" aria-hidden="true">🔒</span><span><strong>Sé reservado:</strong> nada de información a personas ajenas al hospital ni a rangos iniciales.</span></li>
+                <li><span class="tips-list__icon" aria-hidden="true">🤝</span><span>Dentro del área, <strong>compartamos lo que aprendemos</strong>.</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Pie: banner del departamento ===== -->
+  <footer class="footer wrap">
+    <img class="footer__banner" src="assets/pie-banner.webp" width="2048" height="405" loading="lazy"
+         alt="Departamento de Seguridad Hospitalaria de Malibú · Sr. Ghost y Dra. Scarlett, médicos tratantes · OneState Roleplay" />
+    <div class="footer__bar">
+      <img class="footer__logo" src="assets/logo-96.webp" width="96" height="96" alt="" loading="lazy" />
+      <p class="footer__text"><strong>Departamento de Seguridad Hospitalaria</strong><span>Documento interno · Servicios Médicos Malibu Latam</span></p>
+      <nav class="footer__links" aria-label="Enlaces">
+        <a href="https://onestate.com" target="_blank" rel="noopener noreferrer">OneState</a>
+        <a href="https://portal-alianzamedica-malibu.netlify.app/" target="_blank" rel="noopener noreferrer">Portal de la facción</a>
+        <a href="#top">Volver arriba ↑</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- ===== Modal / lightbox ===== -->
+  <div class="modal" id="modal" hidden>
+    <div class="modal__backdrop" data-close></div>
+    <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <header class="modal__header">
+        <span class="icon-box" id="modal-icon" aria-hidden="true"></span>
+        <h2 class="modal__title" id="modal-title"></h2>
+        <button type="button" class="modal__close" data-close aria-label="Cerrar">✕</button>
+      </header>
+      <div class="modal__well" id="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- ===== Toast ===== -->
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <noscript><p class="wrap">Necesitas JavaScript activado para ver el mapa interactivo.</p></noscript>
+</body>
+</html>
