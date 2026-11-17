@@ -1,6 +1,0 @@
-node_modules/
-.firebase/
-*.log
-# Credenciales de servicio: NUNCA subirlas
-serviceAccountKey.json
-*-firebase-adminsdk-*.json
